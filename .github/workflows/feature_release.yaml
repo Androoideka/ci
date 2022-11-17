@@ -5,16 +5,20 @@ on:
     branches:
       - main
     paths:
-      - features/**
+      - features/**/devcontainer-feature.json*
+      - features/**/install.sh*
 
 jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: "Publish Features"
+      - name: Publish Features
         uses: devcontainers/action@v1
         with:
           publish-features: "true"
