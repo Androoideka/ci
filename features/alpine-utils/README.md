@@ -1,13 +1,13 @@
 
-# Basic tools for Visual Studio Code devcontainer (Alpine Linux) (alpine-dev-tools)
+# Alpine development setup (alpine-utils)
 
-Installs tools for development using Visual Studio Code connected to an Alpine Linux container
+Installs tools for development using Visual Studio Code on an Alpine Linux image
 
 ## Example Usage
 
 ```json
 "features": {
-    "ghcr.io/Androoideka/Container-Setups/alpine-dev-tools:1": {}
+    "ghcr.io/Androoideka/Container-Setups/alpine-utils:1": {}
 }
 ```
 
@@ -17,4 +17,4 @@ This feature installs a Visual Studio Code Server so that development can be don
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Androoideka/Container-Setups/blob/main/features/dev-tools/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Androoideka/Container-Setups/blob/main/features/alpine-utils/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

@@ -1,13 +1,13 @@
 
-# WSLg configuration (wslg-integration)
+# WSLg container integration (wslg-config)
 
-Container configuration settings to support WSLg
+Container configuration settings to use WSLg for rendering GUI apps
 
 ## Example Usage
 
 ```json
 "features": {
-    "ghcr.io/Androoideka/Container-Setups/wslg-integration:1": {}
+    "ghcr.io/Androoideka/Container-Setups/wslg-config:1": {}
 }
 ```
 
@@ -18,4 +18,4 @@ Reference: https://github.com/microsoft/wslg/blob/main/samples/container/Contain
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Androoideka/Container-Setups/blob/main/features/wslg/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Androoideka/Container-Setups/blob/main/features/wslg-config/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
