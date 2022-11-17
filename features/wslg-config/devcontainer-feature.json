@@ -1,8 +1,8 @@
 {
-    "id": "wslg-integration",
+    "id": "wslg-config",
     "version": "1.0.0",
-    "name": "WSLg configuration",
-    "description": "Container configuration settings to support WSLg",
+    "name": "WSLg container integration",
+    "description": "Container configuration settings to use WSLg for rendering GUI apps",
     "mounts": [
         {
             "source": "/tmp/.X11-unix",

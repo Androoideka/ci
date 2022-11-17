@@ -1,6 +1,0 @@
-{
-    "id": "alpine-dev-tools",
-    "version": "1.0.0",
-    "name": "Basic tools for Visual Studio Code devcontainer (Alpine Linux)",
-    "description": "Installs tools for development using Visual Studio Code connected to an Alpine Linux container"
-}
