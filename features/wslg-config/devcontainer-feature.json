@@ -16,7 +16,7 @@
         }
     ],
     "containerEnv": {
-        "DISPLAY": "${localEnv:DISPLAY}",
+        "DISPLAY": "${localEnv:-DISPLAY}",
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}"
