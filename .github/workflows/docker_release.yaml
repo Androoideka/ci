@@ -20,17 +20,24 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build and push
+      - name: Build and push Alpine-GUI
         uses: docker/build-push-action@v3
         with:
           context: .
           file: docker/images/Alpine-GUI/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/alpine-gui:latest
-      - name: Build and push
+      - name: Build and push Alpine-GUI-Java
         uses: docker/build-push-action@v3
         with:
           context: .
           file: docker/images/Alpine-GUI-Java/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/alpine-gui-java:latest
+      - name: Build and push Alpine-Java-WinPack
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: docker/images/Alpine-Java-WinPack/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/alpine-java-winpack:latest
