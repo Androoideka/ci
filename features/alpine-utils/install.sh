@@ -37,14 +37,12 @@ if [ -f "${MARKER_FILE}" ]; then
     source "${MARKER_FILE}"
 fi
 
-# Install git, bash, common dependencies
+# Install git and common dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     apk update
     apk add --no-cache \
         tzdata \
         sudo \
-        grep \
-        which \
         binutils \
         git \
         shadow

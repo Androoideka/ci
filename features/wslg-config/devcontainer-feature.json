@@ -1,6 +1,6 @@
 {
     "id": "wslg-config",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "WSLg container integration",
     "description": "Container configuration settings to use WSLg for rendering GUI apps",
     "mounts": [
@@ -16,9 +16,9 @@
         }
     ],
     "containerEnv": {
-        "DISPLAY": "${localEnv:-DISPLAY}",
-        "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
-        "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
-        "PULSE_SERVER": "${localEnv:PULSE_SERVER}"
+        "DISPLAY": "${DISPLAY}",
+        "WAYLAND_DISPLAY": "${WAYLAND_DISPLAY}",
+        "XDG_RUNTIME_DIR": "${XDG_RUNTIME_DIR}",
+        "PULSE_SERVER": "${PULSE_SERVER}"
     }
 }
