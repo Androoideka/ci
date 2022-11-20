@@ -1,12 +1,6 @@
 name: Release dev container features & generate documentation
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - features/**/devcontainer-feature.json*
-      - features/**/install.sh*
 
 jobs:
   deploy:
@@ -21,9 +15,9 @@ jobs:
       - name: Publish Features
         uses: devcontainers/action@v1
         with:
-          publish-features: "true"
-          base-path-to-features: "./features"
-          generate-docs: "true"
+          publish-features: 'true'
+          base-path-to-features: './features'
+          generate-docs: 'true'
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

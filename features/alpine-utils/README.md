@@ -7,7 +7,7 @@ Installs tools for development using Visual Studio Code on an Alpine Linux image
 
 ```json
 "features": {
-    "ghcr.io/Androoideka/Container-Setups/alpine-utils:1": {}
+    "ghcr.io/androoideka/containers/alpine-utils:1": {}
 }
 ```
 
@@ -17,4 +17,4 @@ This feature installs a Visual Studio Code Server so that development can be don
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Androoideka/Container-Setups/blob/main/features/alpine-utils/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Androoideka/containers/blob/main/features/alpine-utils/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
