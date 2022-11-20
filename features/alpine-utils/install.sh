@@ -43,7 +43,6 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     apk add --no-cache \
         tzdata \
         sudo \
-        binutils \
         git \
         shadow
 

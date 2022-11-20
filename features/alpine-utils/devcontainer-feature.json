@@ -1,6 +1,6 @@
 {
     "id": "alpine-utils",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "Alpine development setup",
     "description": "Installs tools for development using Visual Studio Code on an Alpine Linux image"
 }

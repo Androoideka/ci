@@ -1,0 +1,43 @@
+name: Release GUI Docker images
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docker/images/Alpine-GUI**'
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push Alpine-GUI
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: docker/images/Alpine-GUI/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/alpine-gui:latest
+      - name: Build and push Alpine-GUI-Java
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: docker/images/Alpine-GUI-Java/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/alpine-gui-java:latest
+      - name: Build and push Alpine-GUI-JavaFX
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: docker/images/Alpine-GUI-JavaFX/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/alpine-gui-javafx:latest
