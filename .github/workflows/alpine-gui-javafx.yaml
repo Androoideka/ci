@@ -1,11 +1,6 @@
 name: Ship alpine-gui-javafx image
 on:
-  workflow_call:
-    secrets:
-      DOCKER_USER:
-        required: true
-      DOCKER_TOKEN:
-        required: true
+  workflow_dispatch:
   workflow_run:
     workflows:
       - Ship alpine-gui-java image
