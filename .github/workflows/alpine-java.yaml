@@ -1,0 +1,28 @@
+name: Ship alpine-java image
+on:
+  workflow_call:
+    secrets:
+      DOCKER_USER:
+        required: true
+      DOCKER_TOKEN:
+        required: true
+  workflow_run:
+    workflows:
+      - Update Alpine base image
+    types:
+      - completed
+  push:
+    branches:
+      - main
+    paths:
+      - 'docker/images/alpine-java/**'
+jobs:
+  release_image:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Release image
+        uses: ./.github/workflows/release_image.yaml
+        with:
+          dockerfile-dir: alpine-java
+        secrets: inherit

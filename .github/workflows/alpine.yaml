@@ -1,0 +1,12 @@
+name: Update Alpine base image
+on:
+  workflow_call:
+    secrets:
+      DOCKER_USER:
+        required: true
+      DOCKER_TOKEN:
+        required: true
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest

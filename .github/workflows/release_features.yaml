@@ -1,7 +1,11 @@
 name: Release dev container features & generate documentation
 on:
   workflow_dispatch:
-
+  push:
+    branches:
+      - main
+    paths:
+      - 'features/**'
 jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}

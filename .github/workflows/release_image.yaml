@@ -1,17 +1,19 @@
-name: Release basic Docker images
+name: Build and push image to Docker Hub
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'docker/images/Alpine**'
-      - '!docker/images/Alpine-GUI**'
-      - '!docker/images/Alpine-Java-WinPack**'
-
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+    secrets:
+      DOCKER_USER:
+        required: true
+      DOCKER_TOKEN:
+        required: true
 jobs:
-  build-docker:
+  ship_to_docker_hub:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,10 +24,10 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build and push Alpine-Java
+      - name: Build and push image
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: docker/images/Alpine-Java/Dockerfile
+          file: docker/images/${{ inputs.image }}/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/alpine-java:latest
+          tags: ${{ secrets.DOCKER_USER }}/${{ inputs.image }}:latest
