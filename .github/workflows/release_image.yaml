@@ -7,8 +7,10 @@ on:
         type: string
     secrets:
       DOCKER_USER:
+        description: 'Username on DockerHub'
         required: true
       DOCKER_TOKEN:
+        description: 'App password on DockerHub'
         required: true
 jobs:
   ship_to_docker_hub:

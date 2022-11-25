@@ -16,9 +16,5 @@ on:
           - alpine-java-winpack
 jobs:
   release_selected_image:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Release image
-        uses: ./.github/workflows/${{ inputs.image }}.yaml
-        secrets: inherit
+    uses: ./.github/workflows/${{ inputs.image }}.yaml
+    secrets: inherit

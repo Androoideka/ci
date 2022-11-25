@@ -18,11 +18,7 @@ on:
       - 'docker/images/alpine-java-winpack/**'
 jobs:
   release_image:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Release image
-        uses: ./.github/workflows/release_image.yaml
-        with:
-          dockerfile-dir: alpine-java-winpack
-        secrets: inherit
+    uses: ./.github/workflows/release_image.yaml
+    with:
+      image: alpine-java-winpack
+    secrets: inherit

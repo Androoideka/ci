@@ -18,11 +18,7 @@ on:
       - 'docker/images/alpine-gui/**'
 jobs:
   release_image:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Release image
-        uses: ./.github/workflows/release_image.yaml
-        with:
-          dockerfile-dir: alpine-gui
-        secrets: inherit
+    uses: ./.github/workflows/release_image.yaml
+    with:
+      image: alpine-gui
+    secrets: inherit
