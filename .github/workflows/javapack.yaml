@@ -1,0 +1,70 @@
+name: Package jar into self-contained package for Windows
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        type: string
+        required: true
+        description: Jar file to package into a runnable application
+      jfx:
+        type: boolean
+        required: false
+        default: false
+        description: Whether to use a JDK with JavaFX bundled to produce GUI applications
+      console:
+        type: boolean
+        required: false
+        default: false
+        description: Whether to package as a console application, useful for Spring Boot
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    outputs:
+      deps: ${{ steps.jdeps.outputs.deps }}
+    steps:
+      - name: Download jar file and resources
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          java-package: ${{ inputs.jfx && 'jdk+fx' || 'jdk' }}
+          distribution: temurin
+          architecture: x64
+      - name: Find dependent jars contained in fat jar
+        run: '! jar -tf "${{ inputs.artifact-name }}.jar" | grep -q BOOT-INF/lib || jar -xf "${{ inputs.artifact-name }}.jar" && echo "classpath=--class-path=${{ github.workspace }}/BOOT-INF/lib/*" >> $GITHUB_ENV'
+      - name: Identify required modules
+        id: jdeps
+        run: echo "deps=`jdeps --ignore-missing-deps --print-module-deps --recursive --multi-release 17 $classpath "${{ inputs.artifact-name }}.jar"`" >> $GITHUB_OUTPUT
+
+  pack:
+    runs-on: windows-latest
+    needs: scan
+    steps:
+      - name: Download jar file and resources
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: jar
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          java-package: ${{ inputs.jfx && 'jdk+fx' || 'jdk' }}
+          distribution: microsoft
+          architecture: x64
+      - name: Generate minimal JRE
+        run: jlink --add-modules ${{ needs.scan.outputs.deps }} --strip-debug --no-man-pages --no-header-files --compress=2 --output .\jre
+      - name: Create app package
+        run: jpackage --type app-image ${{ inputs.console && '--win-console' || '' }} --input .\jar --name "${{ inputs.artifact-name }}" --main-jar "${{ inputs.artifact-name }}.jar" --runtime-image .\jre
+      - name: Pack into archive
+        run: Compress-Archive -LiteralPath "${{ inputs.artifact-name }}\" -DestinationPath "${{ inputs.artifact-name }}.zip"
+      - name: Upload zip file
+        uses: actions/upload-artifact@v3
+        with:
+          retention-days: 1
+          name: ${{ inputs.artifact-name }}.zip
+          path: ${{ inputs.artifact-name }}.zip
