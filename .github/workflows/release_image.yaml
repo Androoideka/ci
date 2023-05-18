@@ -29,7 +29,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: docker/images/${{ inputs.image }}
           file: docker/images/${{ inputs.image }}/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/${{ inputs.image }}:latest
