@@ -5,13 +5,15 @@ ARG MAIN APP_NAME
 COPY . /repo
 RUN find /repo -name "*.java" > sources.txt \
     && javac @sources.txt -d /repo/bin \
-    && jar cfe "${APP_NAME}.jar" $MAIN -C /repo/bin .
+    && jar cfe "${APP_NAME}.jar" $MAIN -C /repo/bin . \
+    && jdeps --print-module-deps "${APP_NAME}.jar" > deps.txt
 
 FROM androoideka/alpine-java-winpack:latest AS packager
-ARG MODULES APP_NAME
+ARG APP_NAME
 COPY --from=builder "${APP_NAME}.jar" /app/jar/
+COPY --from=builder deps.txt /app/
 RUN wine64 $JAVA_WIN/bin/jlink.exe \
-    --add-modules $MODULES \
+    --add-modules `cat /app/deps.txt` \
     --strip-debug \
     --no-man-pages \
     --no-header-files \
