@@ -1,14 +1,14 @@
-name: Ship jupyter-ml image
+name: Ship jupyter-tf image
 on:
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - 'docker/images/jupyter-ml/**'
+      - 'docker/images/jupyter-tf/**'
 jobs:
   release_image:
     uses: ./.github/workflows/release_image.yaml
     with:
-      image: jupyter-ml
+      image: jupyter-tf
     secrets: inherit
